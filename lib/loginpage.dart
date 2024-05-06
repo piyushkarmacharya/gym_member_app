@@ -3,8 +3,9 @@ import "dart:convert";
 
 import "package:flutter/material.dart";
 import 'package:gym_member_app/homepage.dart';
+import "package:gym_member_app/user_provider.dart";
 import "package:http/http.dart" as http;
-import "package:crypto/crypto.dart";
+import "package:provider/provider.dart";
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -28,6 +29,7 @@ class _LoginPageState extends State<LoginPage> {
     if (res.statusCode == 200) {
       setState(() {
         data = jsonDecode(res.body);
+        Provider.of<UserProvider>(context,listen: false).setMid(data['mid']);
       });
     } else {
       print("Cannot connect to that api");
@@ -120,14 +122,7 @@ class _LoginPageState extends State<LoginPage> {
                               if (_formKey.currentState!.validate()) {
                                 email = ctr[0].text;
                                 await fetchData();
-                                if (data.length == 0) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                      duration: Duration(seconds: 1),
-                                      content: Text("Email doesnot Exists"),
-                                    ),
-                                  );
-                                } else {
+                                
                                   if (data['login']==true) {
                                     Navigator.of(context).push(
                                       MaterialPageRoute(
@@ -144,7 +139,7 @@ class _LoginPageState extends State<LoginPage> {
                                       ),
                                     );
                                   }
-                                }
+                                
                               }
                             },
                             child: Text("Login"),

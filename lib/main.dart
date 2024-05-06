@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gym_member_app/homepage.dart';
 import 'package:gym_member_app/loginpage.dart';
+import 'package:gym_member_app/user_provider.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,9 +13,12 @@ class MyApp extends StatelessWidget {
  
  @override
  Widget build(BuildContext context){
-  return MaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: HomePage(),
+  return ChangeNotifierProvider(
+    create: (context) => UserProvider(),
+    child: MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: LoginPage(),
+    ),
   );
  }
 }

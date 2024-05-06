@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:gym_member_app/attendance.dart';
+import 'package:gym_member_app/change_password.dart';
+import 'package:gym_member_app/dashboard.dart';
 import 'package:gym_member_app/loginpage.dart';
+import 'package:gym_member_app/user_provider.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -9,7 +14,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int selectedPage = 0;
   List<String> pageName = ['Dashboard', 'Attendance', 'Change Password'];
-  List<Widget> page = [];
+  List<Widget> page = [Dashboard(), Attendance(), ChangePassword()];
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -21,11 +26,22 @@ class _HomePageState extends State<HomePage> {
             DrawerHeader(
               child: Text("Welcome"),
             ),
-            ...List.generate(pageName.length, (index) => ListTile(title: Text(pageName[index]),)),
+            ...List.generate(
+              pageName.length,
+              (index) => ListTile(
+                title: Text(pageName[index]),
+                onTap: (){
+                  setState(() {
+                    selectedPage=index;
+                  });
+                  Navigator.of(context).pop();
+                },
+              ),
+            ),
           ],
         ),
       ),
-      body: Text("Welcome"),
+      body: Text(Provider.of<UserProvider>(context).getMid().toString()),
     );
   }
 }
