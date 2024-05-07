@@ -22,18 +22,24 @@ class _LoginPageState extends State<LoginPage> {
   Map data ={};
   String? email;
   Future fetchData() async {
-    final res = await http.post(
-        Uri.parse("http://127.0.0.1:8000/api/Member/login"),
+    String url=Provider.of<UserProvider>(context,listen: false).getUrl();
+    try{
+      final res = await http.post(
+        Uri.parse("http://$url:8000/api/Member/login"),
         headers: {'content-Type': 'application/json'},
         body: jsonEncode({'email': ctr[0].text, 'password': ctr[1].text}));
-    if (res.statusCode == 200) {
+        if (res.statusCode == 200) {
       setState(() {
         data = jsonDecode(res.body);
         Provider.of<UserProvider>(context,listen: false).setMid(data['mid']);
       });
-    } else {
-      print("Cannot connect to that api");
+    } 
+    }catch(e){
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(duration: Duration(seconds: 1),content: Text("Connection problem"))
+      );
     }
+      
   }
 
   @override
@@ -58,98 +64,99 @@ class _LoginPageState extends State<LoginPage> {
         backgroundColor: Colors.blueGrey,
         body: Padding(
           padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
-          child: Card(
-            elevation: 24,
-            child: Padding(
-              padding: const EdgeInsets.all(30.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    flex: 3,
-                    child: Center(
-                      child: Image.asset(
-                        "assets/images/logo.png",
+          child: Container(
+            height: double.infinity,
+            child: Card(
+              elevation: 24,
+              child: Padding(
+                padding: const EdgeInsets.all(30.0),
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Center(
+                        child: Image.asset(
+                          "assets/images/logo.png",
+                          height: 300,
+                        ),
                       ),
-                    ),
-                  ),
-                  Spacer(),
-                  Expanded(
-                    flex: 4,
-                    child: Form(
-                      key: _formKey,
-                      child: Column(
-                        children: [
-                          TextFormField(
-                            decoration: InputDecoration(
-                              labelText: "Email",
-                              prefixIcon: Icon(Icons.email),
+                      
+                      Form(
+                        key: _formKey,
+                        child: Column(
+                          children: [
+                            TextFormField(
+                              decoration: InputDecoration(
+                                labelText: "Email",
+                                prefixIcon: Icon(Icons.email),
+                              ),
+                              controller: ctr[0],
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return "Please enter email";
+                                }
+                                if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
+                                    .hasMatch(value)) {
+                                  return "Please enter valid email";
+                                }
+                                return null;
+                              },
                             ),
-                            controller: ctr[0],
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return "Please enter email";
-                              }
-                              if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
-                                  .hasMatch(value)) {
-                                return "Please enter valid email";
-                              }
-                              return null;
-                            },
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          TextFormField(
-                            obscureText: true,
-                            decoration: InputDecoration(
-                              labelText: "Password",
-                              prefixIcon: Icon(Icons.lock),
+                            SizedBox(
+                              height: 10,
                             ),
-                            controller: ctr[1],
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return "Please enter password";
-                              }
-                              return null;
-                            },
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          ElevatedButton(
-                            onPressed: () async {
-                              if (_formKey.currentState!.validate()) {
-                                email = ctr[0].text;
-                                await fetchData();
-                                
-                                  if (data['login']==true) {
-                                    Navigator.of(context).push(
-                                      MaterialPageRoute(
-                                        builder: (context) {
-                                          return HomePage();
-                                        },
-                                      ),
-                                    );
-                                  } else {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        duration: Duration(seconds: 1),
-                                        content: Text("Incorrect Password"),
-                                      ),
-                                    );
-                                  }
-                                
-                              }
-                            },
-                            child: Text("Login"),
-                          )
-                        ],
+                            TextFormField(
+                              obscureText: true,
+                              decoration: InputDecoration(
+                                labelText: "Password",
+                                prefixIcon: Icon(Icons.lock),
+                              ),
+                              controller: ctr[1],
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return "Please enter password";
+                                }
+                                return null;
+                              },
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            ElevatedButton(
+                              onPressed: () async {
+                                if (_formKey.currentState!.validate()) {
+                                  email = ctr[0].text;
+                                  await fetchData();
+                                  
+                                    if (data['login']==true) {
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                          builder: (context) {
+                                            return HomePage();
+                                          },
+                                        ),
+                                      );
+                                    } else {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          duration: Duration(seconds: 1),
+                                          content: Text("Email and Password doesnot match"),
+                                        ),
+                                      );
+                                    }
+                                  
+                                }
+                              },
+                              child: Text("Login"),
+                            )
+                          ],
+                        ),
                       ),
-                    ),
+                      
+                    ],
                   ),
-                  Spacer(),
-                ],
+                ),
               ),
             ),
           ),
