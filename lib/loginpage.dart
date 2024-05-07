@@ -125,8 +125,11 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                             ElevatedButton(
                               onPressed: () async {
+                                setState(() {
+                                  
+                                });
                                 if (_formKey.currentState!.validate()) {
-                                  email = ctr[0].text;
+                                  
                                   await fetchData();
                                   
                                     if (data['login']==true) {

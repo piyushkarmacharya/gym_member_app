@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:gym_member_app/attendance.dart';
 import 'package:gym_member_app/change_password.dart';
 import 'package:gym_member_app/dashboard.dart';
@@ -19,6 +20,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(pageName[selectedPage]),
+        actions: [GestureDetector(onTap: (){Navigator.of(context).pop();},child: Icon(Icons.exit_to_app))],
       ),
       drawer: Drawer(
         child: ListView(
