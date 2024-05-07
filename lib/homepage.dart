@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      body: Text(Provider.of<UserProvider>(context).getMid().toString()),
+      body: page[selectedPage],
     );
   }
 }
