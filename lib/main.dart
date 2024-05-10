@@ -10,16 +10,16 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
- const MyApp({super.key});
- 
- @override
- Widget build(BuildContext context){
-  return ChangeNotifierProvider(
-    create: (context) => UserProvider(),
-    child: MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: LoginPage(),
-    ),
-  );
- }
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider(
+      create: (context) => UserProvider(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: LoginPage(),
+      ),
+    );
+  }
 }

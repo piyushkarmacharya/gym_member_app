@@ -19,27 +19,25 @@ class _LoginPageState extends State<LoginPage> {
     TextEditingController(),
     TextEditingController()
   ];
-  Map data ={};
+  Map data = {};
   String? email;
   Future fetchData() async {
-    String url=Provider.of<UserProvider>(context,listen: false).getUrl();
-    try{
+    String url = Provider.of<UserProvider>(context, listen: false).getUrl();
+    try {
       final res = await http.post(
-        Uri.parse("http://$url:8000/api/Member/login"),
-        headers: {'content-Type': 'application/json'},
-        body: jsonEncode({'email': ctr[0].text, 'password': ctr[1].text}));
-        if (res.statusCode == 200) {
-      setState(() {
-        data = jsonDecode(res.body);
-        Provider.of<UserProvider>(context,listen: false).setMid(data['mid']);
-      });
-    } 
-    }catch(e){
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(duration: Duration(seconds: 1),content: Text("Connection problem"))
-      );
+          Uri.parse("http://$url:8000/api/Member/login"),
+          headers: {'content-Type': 'application/json'},
+          body: jsonEncode({'email': ctr[0].text, 'password': ctr[1].text}));
+      if (res.statusCode == 200) {
+        setState(() {
+          data = jsonDecode(res.body);
+          Provider.of<UserProvider>(context, listen: false).setMid(data['mid']);
+        });
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          duration: Duration(seconds: 1), content: Text("Connection problem")));
     }
-      
   }
 
   @override
@@ -81,7 +79,6 @@ class _LoginPageState extends State<LoginPage> {
                           height: 300,
                         ),
                       ),
-                      
                       Form(
                         key: _formKey,
                         child: Column(
@@ -125,30 +122,28 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                             ElevatedButton(
                               onPressed: () async {
-                                setState(() {
-                                  
-                                });
+                                setState(() {});
                                 if (_formKey.currentState!.validate()) {
-                                  
                                   await fetchData();
-                                  
-                                    if (data['login']==true) {
-                                      Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                          builder: (context) {
-                                            return HomePage();
-                                          },
-                                        ),
-                                      );
-                                    } else {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          duration: Duration(seconds: 1),
-                                          content: Text("Email and Password doesnot match"),
-                                        ),
-                                      );
-                                    }
-                                  
+
+                                  if (data['login'] == true) {
+                                    print("Login success");
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) {
+                                          return HomePage();
+                                        },
+                                      ),
+                                    );
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        duration: Duration(seconds: 1),
+                                        content: Text(
+                                            "Email and Password doesnot match"),
+                                      ),
+                                    );
+                                  }
                                 }
                               },
                               child: Text("Login"),
@@ -156,7 +151,6 @@ class _LoginPageState extends State<LoginPage> {
                           ],
                         ),
                       ),
-                      
                     ],
                   ),
                 ),

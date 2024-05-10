@@ -19,7 +19,8 @@ class _Attendance extends State<Attendance> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    getQrString();
+    
+    
   }
 
   Future<void> getQrString() async {
@@ -27,7 +28,7 @@ class _Attendance extends State<Attendance> {
     final res = await http.get(Uri.parse("http://$url:8000/api/AttendanceQr"));
     if (res.statusCode == 200) {
       setState(() {
-        qrStr = jsonDecode(res.body)[0]['qrstr'];
+        qrStr = jsonDecode(res.body)['qrstr'];
       });
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -50,7 +51,7 @@ class _Attendance extends State<Attendance> {
       if (res.statusCode == 200) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text("Attendance done"),
+            content: Text(jsonDecode(res.body)['message']),
             duration: Duration(seconds: 1),
           ),
         );
@@ -63,9 +64,10 @@ class _Attendance extends State<Attendance> {
         );
       }
     }else{
+      
       ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text("Qr donot match"),
+            content: Text("qr donot match"),
             duration: Duration(seconds: 1),
           ),
         );
@@ -80,6 +82,7 @@ class _Attendance extends State<Attendance> {
           children: [
             ElevatedButton(
               onPressed: () async {
+                getQrString();
                 var res = await Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -90,6 +93,7 @@ class _Attendance extends State<Attendance> {
                 );
                 setState(() {
                   if (res is String) {
+                    
                     result = res;
                   }
                 });
