@@ -14,10 +14,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int selectedPage = 0;
+  
   List<String> pageName = ['Dashboard', 'Attendance', 'Change Password','Attendance Details'];
   List<Widget> page = [Dashboard(), Attendance(), ChangePassword(),AttendanceDetails()];
   Widget build(BuildContext context) {
+    int selectedPage = Provider.of<UserProvider>(context,listen: false).getCurrentPage();
     return Scaffold(
       appBar: AppBar(
         title: Text(pageName[selectedPage]),
@@ -35,7 +36,7 @@ class _HomePageState extends State<HomePage> {
                 title: Text(pageName[index]),
                 onTap: (){
                   setState(() {
-                    selectedPage=index;
+                    Provider.of<UserProvider>(context,listen: false).setCurrentPage(index);
                   });
                   Navigator.of(context).pop();
                 },
