@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gym_member_app/attendance.dart';
+import 'package:gym_member_app/attendance_details.dart';
 import 'package:gym_member_app/change_password.dart';
 import 'package:gym_member_app/dashboard.dart';
 import 'package:gym_member_app/loginpage.dart';
@@ -14,8 +15,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int selectedPage = 0;
-  List<String> pageName = ['Dashboard', 'Attendance', 'Change Password'];
-  List<Widget> page = [Dashboard(), Attendance(), ChangePassword()];
+  List<String> pageName = ['Dashboard', 'Attendance', 'Change Password','Attendance Details'];
+  List<Widget> page = [Dashboard(), Attendance(), ChangePassword(),AttendanceDetails()];
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(

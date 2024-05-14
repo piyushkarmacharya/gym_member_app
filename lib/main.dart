@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:gym_member_app/attendance.dart';
+import 'package:gym_member_app/attendance_details.dart';
 import 'package:gym_member_app/homepage.dart';
 import 'package:gym_member_app/loginpage.dart';
 import 'package:gym_member_app/user_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:gym_member_app/attendance.dart';
 
 void main() {
   runApp(const MyApp());
