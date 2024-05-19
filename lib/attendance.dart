@@ -78,32 +78,44 @@ class _Attendance extends State<Attendance> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Column(
-          children: [
-            ElevatedButton(
-              onPressed: () async {
-                getQrString();
-                var res = await Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return const SimpleBarcodeScannerPage();
-                    },
-                  ),
-                );
-                setState(() {
-                  if (res is String) {
-                    
-                    result = res;
-                  }
-                });
-
-                attend();
-              },
-              child: Text("Open Scanner"),
-            ),
-            
-          ],
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              
+              ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                                const Color(0xFF1A1363)),
+                            shape: MaterialStateProperty.all<OutlinedBorder>(
+                              RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(24)),
+                            ),
+                ),
+                onPressed: () async {
+                  getQrString();
+                  var res = await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return const SimpleBarcodeScannerPage();
+                      },
+                    ),
+                  );
+                  setState(() {
+                    if (res is String) {
+                      
+                      result = res;
+                    }
+                  });
+              
+                  attend();
+                },
+                child: Text("Open Scanner",style: TextStyle(color: Colors.white,fontSize: 20),),
+              ),
+              Text("Please use Scanner for attendance",style: TextStyle(fontSize: 15),),
+            ],
+          ),
         ),
       ),
     );

@@ -26,16 +26,9 @@ class _AttendanceDetailsState extends State<AttendanceDetails> {
       children: [
         TableCell(child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text(attendanceDetails[i]['mid'].toString(),style: rowTextStyle,),
+          child: Text(attendanceDetails[i]['date'].toString(),style: rowTextStyle,),
         )),
-        TableCell(child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(attendanceDetails[i]['name'].toString(),style: rowTextStyle,),
-        )),
-        TableCell(child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(attendanceDetails[i]['contact_number'].toString(),style: rowTextStyle,),
-        )),
+        
         TableCell(child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(time,style: rowTextStyle,),
@@ -45,7 +38,8 @@ class _AttendanceDetailsState extends State<AttendanceDetails> {
   }
   Future<void> _getAttendanceDetails() async{
     try{
-      final res = await http.get(Uri.parse("http://127.0.0.1:8000/api/memberattendance/info/$mid"));
+      String url=Provider.of<UserProvider>(context,listen: false).getUrl();
+      final res = await http.get(Uri.parse("http://$url:8000/api/memberattendance/info/$mid"));
     if (res.statusCode == 200) {
       List data = jsonDecode(res.body);
       setState(() {
@@ -106,10 +100,8 @@ class _AttendanceDetailsState extends State<AttendanceDetails> {
                     child: Table(children: [
                             TableRow(
                               children: [
-                                TableCell(child: Text('Member ID',style: TextStyle(color: Color(0xFFFFFADF),fontSize: 14,fontWeight: FontWeight.bold,),)),
-                                TableCell(child: Text('Name',style: TextStyle(color: Color(0xFFFFFADF),fontSize: 14,fontWeight: FontWeight.bold,),)),
-                                TableCell(child: Text('Contact',style: TextStyle(color: Color(0xFFFFFADF),fontSize: 14,fontWeight: FontWeight.bold,),)),
-                                TableCell(child: Text('Attendance Time',style: TextStyle(color: Color(0xFFFFFADF),fontSize: 14,fontWeight: FontWeight.bold,),)),
+                                TableCell(child: Text('Date',style: TextStyle(color: Color(0xFFFFFADF),fontSize: 14,fontWeight: FontWeight.bold,),)),
+                                TableCell(child: Text(' Attendance Time',style: TextStyle(color: Color(0xFFFFFADF),fontSize: 14,fontWeight: FontWeight.bold,),)),
                                 
                               ],
                             ),]),

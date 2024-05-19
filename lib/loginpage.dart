@@ -14,7 +14,6 @@ class LoginPage extends StatefulWidget {
   State<LoginPage> createState() => _LoginPageState();
 }
 
-
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   final List<TextEditingController> ctr = [
@@ -23,7 +22,7 @@ class _LoginPageState extends State<LoginPage> {
   ];
   Map data = {};
   String? email;
-  Future fetchData() async {
+  Future login() async {
     String url = Provider.of<UserProvider>(context, listen: false).getUrl();
     try {
       final res = await http.post(
@@ -41,7 +40,8 @@ class _LoginPageState extends State<LoginPage> {
           duration: Duration(seconds: 1), content: Text("Connection problem")));
     }
   }
-  bool _showPassword=false;
+
+  bool _showPassword = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -84,26 +84,26 @@ class _LoginPageState extends State<LoginPage> {
                             decoration: InputDecoration(
                               labelText: "Email",
                               border: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Color(0xFF332F64),
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
+                                borderSide: const BorderSide(
+                                  color: Color(0xFF332F64),
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
                               focusedBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Color(0xFF332F64),
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Color(0xFF332F64),
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
+                                borderSide: const BorderSide(
+                                  color: Color(0xFF332F64),
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                  color: Color(0xFF332F64),
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
                               prefixIcon: Icon(Icons.email),
                             ),
                             controller: ctr[0],
@@ -126,36 +126,36 @@ class _LoginPageState extends State<LoginPage> {
                             decoration: InputDecoration(
                               labelText: "Password",
                               border: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Color(0xFF332F64),
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
+                                borderSide: const BorderSide(
+                                  color: Color(0xFF332F64),
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
                               focusedBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Color(0xFF332F64),
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Color(0xFF332F64),
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
+                                borderSide: const BorderSide(
+                                  color: Color(0xFF332F64),
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                  color: Color(0xFF332F64),
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
                               suffixIcon: IconButton(
-                                        onPressed: () {
-                                          setState(() {
-                                            _showPassword = !_showPassword;
-                                          });
-                                        },
-                                        icon: Icon(_showPassword
-                                            ? Icons.visibility_off
-                                            : Icons.visibility),
-                                      ),
+                                onPressed: () {
+                                  setState(() {
+                                    _showPassword = !_showPassword;
+                                  });
+                                },
+                                icon: Icon(_showPassword
+                                    ? Icons.visibility_off
+                                    : Icons.visibility),
+                              ),
                               prefixIcon: Icon(Icons.lock),
                             ),
                             controller: ctr[1],
@@ -171,26 +171,30 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           Container(
                             height: 45,
-                            width:double.infinity,
+                            width: double.infinity,
                             child: ElevatedButton(
                               style: ButtonStyle(
-                                      backgroundColor:
-                                          MaterialStateProperty.all<Color>(
-                                              const Color(0xFF1A1363)),
-                                      shape: MaterialStateProperty.all<
-                                          OutlinedBorder>(
-                                        RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(24)),
-                                      ),
-                                    ),
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        const Color(0xFF1A1363)),
+                                shape:
+                                    MaterialStateProperty.all<OutlinedBorder>(
+                                  RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(24)),
+                                ),
+                              ),
                               onPressed: () async {
                                 setState(() {});
                                 if (_formKey.currentState!.validate()) {
-                                  await fetchData();
-                                        
+                                  await login();
+
                                   if (data['login'] == true) {
-                                    print("Login success");
+                                    Provider.of<UserProvider>(context,
+                                            listen: false)
+                                        .setMemberName(data['name']);
+                                    Provider.of<UserProvider>(context,
+                                            listen: false)
+                                        .setImgStr(data['photo']);
                                     Navigator.of(context).push(
                                       MaterialPageRoute(
                                         builder: (context) {
@@ -209,7 +213,10 @@ class _LoginPageState extends State<LoginPage> {
                                   }
                                 }
                               },
-                              child: Text("Login",style: TextStyle(color: Colors.white),),
+                              child: Text(
+                                "Login",
+                                style: TextStyle(color: Colors.white),
+                              ),
                             ),
                           )
                         ],

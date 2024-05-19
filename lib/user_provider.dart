@@ -1,8 +1,10 @@
 import "package:flutter/material.dart";
 
 class UserProvider extends ChangeNotifier {
+  String imgStr="";
+  String memberName="";
   int mid = 0;
-  String url = "127.0.0.1";
+  String url = "192.168.0.104";
   int currentPage=0;
 
   void setMid(int i) {
@@ -25,5 +27,21 @@ class UserProvider extends ChangeNotifier {
 
   int getCurrentPage() {
     return currentPage;
+  }
+  void setMemberName(String i){
+    this.memberName=i;
+    notifyListeners();
+  }
+
+  String getMemberName(){
+    return memberName;
+  }
+  void setImgStr(String i){
+    this.imgStr=i;
+    notifyListeners();
+  }
+
+  String getImgStr(){
+    return imgStr;
   }
 }
