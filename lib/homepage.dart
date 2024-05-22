@@ -24,6 +24,7 @@ class _HomePageState extends State<HomePage> {
     int selectedPage = Provider.of<UserProvider>(context,listen: false).getCurrentPage();
     return Scaffold(
       appBar: AppBar(
+                actions: [IconButton(onPressed:(){Navigator.of(context).pop();}, icon: Icon(Icons.exit_to_app))],
                 toolbarHeight: 80,
                 centerTitle: true,
                 title: Row(
@@ -46,7 +47,7 @@ class _HomePageState extends State<HomePage> {
         child: ListView(
           children: [
             DrawerHeader(
-              child: Center(child: Text("Welcome\n$memberName",style: TextStyle(color: Colors.white),)),
+              child: Text(""),
             ),
             ...List.generate(
               pageName.length,
