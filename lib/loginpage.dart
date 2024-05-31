@@ -22,7 +22,7 @@ class _LoginPageState extends State<LoginPage> {
   ];
   Map data = {};
   String? email;
-  Future login() async {
+  Future<void> login() async {
     String url = Provider.of<UserProvider>(context, listen: false).getUrl();
     try {
       final res = await http.post(

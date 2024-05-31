@@ -54,8 +54,7 @@ class _ChangePasswordState extends State<ChangePassword> {
             .showSnackBar(SnackBar(content: Text("Connection problem")));
       }
     } catch (e) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("Exception")));
+      print(e);
     }
   }
   List<bool> _showPassword=[false,false,false];

@@ -4,7 +4,7 @@ class UserProvider extends ChangeNotifier {
   String imgStr="";
   String memberName="";
   int mid = 0;
-  String url = "192.168.0.104";
+  String url = "127.0.0.1";
   int currentPage=0;
 
   void setMid(int i) {

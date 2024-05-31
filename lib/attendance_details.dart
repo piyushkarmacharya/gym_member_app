@@ -20,7 +20,7 @@ class _AttendanceDetailsState extends State<AttendanceDetails> {
   int? mid;
   TableRow getDataRow(int i) {
     TextStyle rowTextStyle=TextStyle(color: Colors.white,fontSize: 14,fontWeight: FontWeight.normal);
-    DateTime temp=DateFormat("yyyy-MM-dd HH:mm:ss").parse(attendanceDetails[i]['created_at'].toString());
+    DateTime temp=DateFormat("yyyy-MM-dd HH:mm:ss").parse(attendanceDetails[i]['created_at']==null?"${attendanceDetails[i]['date']} 00:00:00":attendanceDetails[i]['created_at'].toString());
     String time=DateFormat('HH:mm:ss').format(temp);
     return TableRow(
       children: [
@@ -75,11 +75,11 @@ class _AttendanceDetailsState extends State<AttendanceDetails> {
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Container(
-          height: 362,
+          height: double.infinity,
           width: 597,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            color: Color(0xFF77749B),
+            color: Color(0xFF77749B)
           ),
           child: Padding(
             padding: const EdgeInsets.all(25.0),
@@ -119,6 +119,7 @@ class _AttendanceDetailsState extends State<AttendanceDetails> {
                     ),
                   ),
                 ),
+                Text("Total Present Days : ${attendanceDetails.length}",style: TextStyle(color: Colors.white,fontSize: 14,fontWeight: FontWeight.normal),)
               ],
             ),
           ),

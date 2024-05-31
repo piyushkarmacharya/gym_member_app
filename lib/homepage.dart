@@ -42,12 +42,13 @@ class _HomePageState extends State<HomePage> {
                 
               ),
       drawer: Drawer(
+        
          backgroundColor: Color(0xFF1A1363),
          width: 200,
         child: ListView(
           children: [
             DrawerHeader(
-              child: Text(""),
+              child: Center(child: Text("Welcome\n${Provider.of<UserProvider>(context,listen: false).getMemberName()}",style:TextStyle(color: Colors.white) ,)),
             ),
             ...List.generate(
               pageName.length,
