@@ -67,6 +67,7 @@ class _ChangePasswordState extends State<ChangePassword> {
           IconButton(
               onPressed: () {
                 Navigator.of(context).pop();
+                Navigator.of(context).pop();
               },
               icon: Icon(Icons.exit_to_app))
         ],

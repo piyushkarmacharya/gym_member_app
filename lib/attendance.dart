@@ -84,6 +84,7 @@ class _Attendance extends State<Attendance> {
           IconButton(
               onPressed: () {
                 Navigator.of(context).pop();
+                Navigator.of(context).pop();
               },
               icon: Icon(Icons.exit_to_app))
         ],
