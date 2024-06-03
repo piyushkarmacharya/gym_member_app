@@ -203,11 +203,30 @@ class _LoginPageState extends State<LoginPage> {
                                       ),
                                     );
                                   } else {
+                                    final screenHeight =
+                                        MediaQuery.of(context).size.height;
+                                    final screenWidth =
+                                        MediaQuery.of(context).size.width;
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.only(
+                                                bottomLeft: Radius.circular(0),
+                                                bottomRight:
+                                                    Radius.circular(20),
+                                                topLeft: Radius.circular(0),
+                                                topRight: Radius.circular(20))),
+                                        backgroundColor:
+                                            Colors.red,
+                                        margin: EdgeInsets.fromLTRB(
+                                            0,
+                                            0.8 * screenHeight,
+                                            0.1 * screenWidth,
+                                            10),
+                                        behavior: SnackBarBehavior.floating,
                                         duration: Duration(seconds: 1),
-                                        content: Text(
-                                            "Email and Password doesnot match"),
+                                        content: Center(
+                                            child: Text("Email and password donot match")),
                                       ),
                                     );
                                   }

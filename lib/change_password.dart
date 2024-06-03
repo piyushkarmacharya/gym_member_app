@@ -21,6 +21,8 @@ class _ChangePasswordState extends State<ChangePassword> {
   ];
 
   Future<void> setNewPassword(String oldPass, String newPass) async {
+     final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
     try {
       String url=Provider.of<UserProvider>(context,listen: false).getUrl();
       final res = await http.post(
@@ -36,10 +38,21 @@ class _ChangePasswordState extends State<ChangePassword> {
       if (res.statusCode == 200) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(msg),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(0),
+                    bottomRight: Radius.circular(20),
+                    topLeft: Radius.circular(0),
+                    topRight: Radius.circular(20))),
+            backgroundColor: jsonDecode(res.body)['message']=="Password changed"?Colors.green:Colors.red,
+            margin: EdgeInsets.fromLTRB(
+                0,0.8 * screenHeight,0.1 * screenWidth,10),
+            behavior: SnackBarBehavior.floating,
+            duration: Duration(seconds: 1),
+            content: Center(child: Text(jsonDecode(res.body)['message'])),
           ),
         );
-        if (msg == "success") {
+        if (msg == "Password changed") {
           setState(() {
             Provider.of<UserProvider>(context, listen: false).setCurrentPage(0);
             Navigator.of(context).pushReplacement(

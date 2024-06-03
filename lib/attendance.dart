@@ -40,6 +40,8 @@ class _Attendance extends State<Attendance> {
   }
 
   Future<void> attend() async {
+     final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
     if (result == qrStr) {
       int mid = Provider.of<UserProvider>(context, listen: false).getMid();
       String url = Provider.of<UserProvider>(context, listen: false).getUrl();
@@ -51,8 +53,18 @@ class _Attendance extends State<Attendance> {
       if (res.statusCode == 200) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(jsonDecode(res.body)['message']),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(0),
+                    bottomRight: Radius.circular(20),
+                    topLeft: Radius.circular(0),
+                    topRight: Radius.circular(20))),
+            backgroundColor: jsonDecode(res.body)['message']=="Checked in successfully"?Colors.green:Colors.red,
+            margin: EdgeInsets.fromLTRB(
+                0,0.8 * screenHeight,0.1 * screenWidth,10),
+            behavior: SnackBarBehavior.floating,
             duration: Duration(seconds: 1),
+            content: Center(child: Text(jsonDecode(res.body)['message'])),
           ),
         );
       } else {
@@ -64,7 +76,6 @@ class _Attendance extends State<Attendance> {
         );
       }
     }else{
-      
       ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text("qr donot match"),
