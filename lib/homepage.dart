@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:gym_member_app/attendance.dart';
 import 'package:gym_member_app/attendance_details.dart';
 import 'package:gym_member_app/change_password.dart';
+import 'package:gym_member_app/contact.dart';
 import 'package:gym_member_app/dashboard.dart';
 import 'package:gym_member_app/loginpage.dart';
 import 'package:gym_member_app/user_provider.dart';
@@ -208,7 +209,7 @@ class _HomePageState extends State<HomePage> {
                     setState(() {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => AttendanceDetails(),
+                          builder: (context) => Contact(),
                         ),
                       );
                     });
