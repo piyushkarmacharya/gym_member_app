@@ -5,6 +5,7 @@ import 'package:gym_member_app/attendance_details.dart';
 import 'package:gym_member_app/change_password.dart';
 import 'package:gym_member_app/contact.dart';
 import 'package:gym_member_app/dashboard.dart';
+import 'package:gym_member_app/feedbackpage.dart';
 import 'package:gym_member_app/loginpage.dart';
 import 'package:gym_member_app/user_provider.dart';
 import 'package:provider/provider.dart';
@@ -228,6 +229,39 @@ class _HomePageState extends State<HomePage> {
                         Expanded(
                             child: Text(
                           "Contact Us",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        )),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => FeedbackPage(),
+                        ),
+                      );
+                    });
+                  },
+                  child: Card(
+                    elevation: 10,
+                    child: Column(
+                      children: [
+                        Expanded(
+                          flex: 3,
+                          child: Icon(
+                            Icons.feedback,
+                            size: 0.2 * MediaQuery.of(context).size.width,
+                          ),
+                        ),
+                        Expanded(
+                            child: Text(
+                          "Feedback",
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ))
                       ],
