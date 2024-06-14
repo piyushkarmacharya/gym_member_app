@@ -187,7 +187,6 @@ class _LoginPageState extends State<LoginPage> {
                                 setState(() {});
                                 if (_formKey.currentState!.validate()) {
                                   await login();
-
                                   if (data['login'] == true) {
                                     Provider.of<UserProvider>(context,
                                             listen: false)
