@@ -88,99 +88,102 @@ class _FeedbackPageState extends State<FeedbackPage> {
         ),
         body: Padding(
           padding: const EdgeInsets.all(20.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0,0,0,8),
-                child: Text("Please leave your feedback below : ",style: TextStyle(fontSize: 15),),
-              ),
-              Form(
-                  key: _formKey,
-                  child: Column(
-                    children: [
-                      TextFormField(
-                        maxLines: 10,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderSide: const BorderSide(
-                              color: Color(0xFF332F64),
-                              width: 2,
+          child: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0,0,0,8),
+                  child: Text("Please leave your feedback below : ",style: TextStyle(fontSize: 15),),
+                ),
+                Form(
+                    key: _formKey,
+                    child: Column(
+                      children: [
+                        TextFormField(
+                          maxLines: 10,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                color: Color(0xFF332F64),
+                                width: 2,
+                              ),
+                              borderRadius: BorderRadius.circular(10),
                             ),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(
-                              color: Color(0xFF332F64),
-                              width: 2,
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                color: Color(0xFF332F64),
+                                width: 2,
+                              ),
+                              borderRadius: BorderRadius.circular(10),
                             ),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(
-                              color: Color(0xFF332F64),
-                              width: 2,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                color: Color(0xFF332F64),
+                                width: 2,
+                              ),
+                              borderRadius: BorderRadius.circular(10),
                             ),
-                            borderRadius: BorderRadius.circular(10),
                           ),
+                          controller: ctr,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return "Feedback cannot be empty";
+                            }
+                            if (value.length > 500) {
+                              return "Feedback can only accept 500 letters";
+                            }
+                            if(value.length<4){
+                              return "Too short feedback";
+                            }
+                            if(RegExp(r'^\s*[^\s]{0,3}$').hasMatch(value)){
+                              return "invalid feedback";
+                            }
+                            
+                            return null;
+                          },
                         ),
-                        controller: ctr,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return "Feedback cannot be empty";
-                          }
-                          if (value.length > 500) {
-                            return "Feedback can only accept 500 letters";
-                          }
-                          if(value.length<4){
-                            return "Too short feedback";
-                          }
-                          if(RegExp(r'^\s*[^\s]{0,3}$').hasMatch(value)){
-                            return "invalid feedback";
-                          }
-                          
-                          return null;
-                        },
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: ElevatedButton(
-                              onPressed: () {
-                                if(_formKey.currentState!.validate()){
-                                  setFeedback();
-                                }else{
-                                  print("validate first");
-                                }
-                              },
-                              child: Text("Submit",style: TextStyle(color: Colors.white),),
-                              style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all<Color>(
-                                    const Color(0xFF1A1363)),
-                                shape: MaterialStateProperty.all<OutlinedBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(24)),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  if(_formKey.currentState!.validate()){
+                                    setFeedback();
+                                  }else{
+                                    print("validate first");
+                                  }
+                                },
+                                child: Text("Submit",style: TextStyle(color: Colors.white),),
+                                style: ButtonStyle(
+                                  backgroundColor: MaterialStateProperty.all<Color>(
+                                      const Color(0xFF1A1363)),
+                                  shape: MaterialStateProperty.all<OutlinedBorder>(
+                                    RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(24)),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: ElevatedButton(style: ButtonStyle(
-                                    
-                                    shape: MaterialStateProperty.all<OutlinedBorder>(
-                                      RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(24)),
-                                    ),
-                                  ),onPressed: (){Navigator.of(context).pop();}, child: Text("Cancel")),
-                              )
-                        ],
-                      )
-                    ],
-                  )),
-            ],
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: ElevatedButton(style: ButtonStyle(
+                                      
+                                      shape: MaterialStateProperty.all<OutlinedBorder>(
+                                        RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(24)),
+                                      ),
+                                    ),onPressed: (){Navigator.of(context).pop();}, child: Text("Cancel")),
+                                )
+                          ],
+                        )
+                      ],
+                    )),
+              ],
+            ),
           ),
         ),
       ),
