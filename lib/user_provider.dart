@@ -4,7 +4,7 @@ class UserProvider extends ChangeNotifier {
   String imgStr="";
   String memberName="";
   int mid = 0;
-  String url = "192.168.0.105";
+  String url = "127.0.0.1";
   int currentPage=0;
 
   void setMid(int i) {
@@ -29,7 +29,7 @@ class UserProvider extends ChangeNotifier {
     return currentPage;
   }
   void setMemberName(String i){
-    this.memberName=i;
+    memberName=i;
     notifyListeners();
   }
 
@@ -37,7 +37,7 @@ class UserProvider extends ChangeNotifier {
     return memberName;
   }
   void setImgStr(String i){
-    this.imgStr=i;
+    imgStr=i;
     notifyListeners();
   }
 

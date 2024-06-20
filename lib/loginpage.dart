@@ -36,7 +36,7 @@ class _LoginPageState extends State<LoginPage> {
         });
       }
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           duration: Duration(seconds: 1), content: Text("Connection problem")));
     }
   }
@@ -48,8 +48,8 @@ class _LoginPageState extends State<LoginPage> {
         appBar: AppBar(
           actions: [
             GestureDetector(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
+              child: const Padding(
+                padding:  EdgeInsets.all(8.0),
                 child: Icon(
                   Icons.people,
                   color: Color(0xFF1A1363),
@@ -60,8 +60,8 @@ class _LoginPageState extends State<LoginPage> {
           ],
         ),
         body: Padding(
-          padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
-          child: Container(
+          padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+          child: SizedBox(
             height: double.infinity,
             child: Padding(
               padding: const EdgeInsets.all(30.0),
@@ -104,7 +104,7 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                                 borderRadius: BorderRadius.circular(10),
                               ),
-                              prefixIcon: Icon(Icons.email),
+                              prefixIcon: const Icon(Icons.email),
                             ),
                             controller: ctr[0],
                             validator: (value) {
@@ -118,7 +118,7 @@ class _LoginPageState extends State<LoginPage> {
                               return null;
                             },
                           ),
-                          SizedBox(
+                         const  SizedBox(
                             height: 10,
                           ),
                           TextFormField(
@@ -156,7 +156,7 @@ class _LoginPageState extends State<LoginPage> {
                                     ? Icons.visibility_off
                                     : Icons.visibility),
                               ),
-                              prefixIcon: Icon(Icons.lock),
+                              prefixIcon: const Icon(Icons.lock),
                             ),
                             controller: ctr[1],
                             validator: (value) {
@@ -166,10 +166,10 @@ class _LoginPageState extends State<LoginPage> {
                               return null;
                             },
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
-                          Container(
+                          SizedBox(
                             height: 45,
                             width: double.infinity,
                             child: ElevatedButton(
@@ -208,7 +208,7 @@ class _LoginPageState extends State<LoginPage> {
                                         MediaQuery.of(context).size.width;
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
-                                        shape: RoundedRectangleBorder(
+                                        shape:const  RoundedRectangleBorder(
                                             borderRadius: BorderRadius.only(
                                                 bottomLeft: Radius.circular(0),
                                                 bottomRight:
@@ -223,15 +223,15 @@ class _LoginPageState extends State<LoginPage> {
                                             0.1 * screenWidth,
                                             10),
                                         behavior: SnackBarBehavior.floating,
-                                        duration: Duration(seconds: 1),
-                                        content: Center(
+                                        duration:const  Duration(seconds: 1),
+                                        content:const  Center(
                                             child: Text("Email and password donot match")),
                                       ),
                                     );
                                   }
                                 }
                               },
-                              child: Text(
+                              child: const Text(
                                 "Login",
                                 style: TextStyle(color: Colors.white),
                               ),

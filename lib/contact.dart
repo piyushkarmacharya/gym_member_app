@@ -7,6 +7,7 @@ class Contact extends StatefulWidget {
 }
 
 class _ContactState extends State<Contact> {
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
@@ -18,20 +19,20 @@ class _ContactState extends State<Contact> {
                 Navigator.of(context).pop();
                 Navigator.of(context).pop();
               },
-              icon: Icon(Icons.exit_to_app))
+              icon: const Icon(Icons.exit_to_app))
         ],
         toolbarHeight: 80,
         centerTitle: true,
         title: Row(
           children: [
-            Container(
+            SizedBox(
               height: 60,
               width: 80,
               child: Image.asset(
                 "assets/images/logo.png",
               ),
             ),
-            Text(
+            const Text(
               "CLUB\nDESPERADO",
               style: TextStyle(
                   color: Color(0xFF1A1363),
@@ -48,28 +49,28 @@ class _ContactState extends State<Contact> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(8.0,0,0,0),
+              const Padding(
+                padding:  EdgeInsets.fromLTRB(8.0,0,0,0),
                 child: Text("Club Desperado",style: TextStyle(
                         
                         fontSize: 20,
                         fontWeight: FontWeight.bold),),
               ),
-              Text("   Byasi, Bhaktapur-15"),
+              const Text("   Byasi, Bhaktapur-15"),
               Padding(
                 padding: const EdgeInsets.fromLTRB(8,16,8,8),
                 child: Table(
-                  children: [
+                  children: const [
                     TableRow(children: [
                       Row(
                         children: [
                           Icon(Icons.phone,color: Color(0xFF1A1363),),
                           Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding:  EdgeInsets.all(8.0),
                             child: Text("Contact : "),
                           ),
                           Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding:  EdgeInsets.all(8.0),
                             child: Text("+9779851044356"),
                           ),
                         ],
@@ -80,11 +81,11 @@ class _ContactState extends State<Contact> {
                         children: [
                           Icon(Icons.mail,color: Color(0xFF1A1363),),
                           Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding:  EdgeInsets.all(8.0),
                             child: Text("Email : "),
                           ),
                           Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding:  EdgeInsets.all(8.0),
                             child: Text("clubdesperado@gmail.com"),
                           ),
                         ],
@@ -95,11 +96,11 @@ class _ContactState extends State<Contact> {
                         children: [
                           Icon(Icons.public,color: Color(0xFF1A1363),),
                           Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: EdgeInsets.all(8.0),
                             child: Text("Website : "),
                           ),
                           Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding:  EdgeInsets.all(8.0),
                             child: Text("https://clubdesperado.com.np"),
                           ),
                         ],

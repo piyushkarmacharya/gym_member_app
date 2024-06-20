@@ -1,8 +1,5 @@
-import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
-import "package:flutter/widgets.dart";
 import "package:gym_member_app/user_provider.dart";
-import "package:intl/intl.dart";
 import 'package:http/http.dart' as http;
 import "dart:convert";
 
@@ -19,7 +16,7 @@ class _AttendanceDetailsState extends State<AttendanceDetails> {
   List attendanceDetails=[];
   int? mid;
   TableRow getDataRow(int i) {
-    TextStyle rowTextStyle=TextStyle(color: Colors.white,fontSize: 14,fontWeight: FontWeight.normal);
+    TextStyle rowTextStyle=const TextStyle(color: Colors.white,fontSize: 14,fontWeight: FontWeight.normal);
     // DateTime temp=DateFormat("yyyy-MM-dd HH:mm:ss").parse(attendanceDetails[i]['created_at']==null?"${attendanceDetails[i]['date']} 00:00:00":attendanceDetails[i]['created_at'].toString());
     String time=attendanceDetails[i]['time']==null?"00:00:00":attendanceDetails[i]['time'].toString();
     return TableRow(
@@ -47,7 +44,7 @@ class _AttendanceDetailsState extends State<AttendanceDetails> {
       });
       
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Connection problem"),),);
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Connection problem"),),);
     }
     }catch(e){
            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.toString()),),);
@@ -58,7 +55,7 @@ class _AttendanceDetailsState extends State<AttendanceDetails> {
 
   @override
   void initState() {
-    // TODO: implement initState
+
     super.initState();
     setState(() {
           mid=Provider.of<UserProvider>(context,listen: false).getMid();
@@ -80,20 +77,20 @@ class _AttendanceDetailsState extends State<AttendanceDetails> {
                 Navigator.of(context).pop();
                 Navigator.of(context).pop();
               },
-              icon: Icon(Icons.exit_to_app))
+              icon: const Icon(Icons.exit_to_app))
         ],
         toolbarHeight: 80,
         centerTitle: true,
         title: Row(
           children: [
-            Container(
+            SizedBox(
               height: 60,
               width: 80,
               child: Image.asset(
                 "assets/images/logo.png",
               ),
             ),
-            Text(
+            const Text(
               "CLUB\nDESPERADO",
               style: TextStyle(
                   color: Color(0xFF1A1363),
@@ -110,14 +107,14 @@ class _AttendanceDetailsState extends State<AttendanceDetails> {
           width: 597,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            color: Color(0xFF77749B)
+            color: const Color(0xFF77749B)
           ),
           child: Padding(
             padding: const EdgeInsets.all(25.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   "Attendance Details",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
@@ -127,8 +124,8 @@ class _AttendanceDetailsState extends State<AttendanceDetails> {
                 ),
                 
                 Padding(
-                  padding: EdgeInsets.fromLTRB(16,16,16,0),
-                    child: Table(children: [
+                  padding: const EdgeInsets.fromLTRB(16,16,16,0),
+                    child: Table(children: const [
                             TableRow(
                               children: [
                                 TableCell(child: Text('Date',style: TextStyle(color: Color(0xFFFFFADF),fontSize: 14,fontWeight: FontWeight.bold,),)),
@@ -150,7 +147,7 @@ class _AttendanceDetailsState extends State<AttendanceDetails> {
                     ),
                   ),
                 ),
-                Text("Total Present Days : ${attendanceDetails.length}",style: TextStyle(color: Colors.white,fontSize: 14,fontWeight: FontWeight.normal),)
+                Text("Total Present Days : ${attendanceDetails.length}",style:const TextStyle(color: Colors.white,fontSize: 14,fontWeight: FontWeight.normal),)
               ],
             ),
           ),

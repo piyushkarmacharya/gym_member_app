@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:gym_member_app/attendance.dart';
 import 'package:gym_member_app/attendance_details.dart';
 import 'package:gym_member_app/change_password.dart';
 import 'package:gym_member_app/contact.dart';
-import 'package:gym_member_app/dashboard.dart';
 import 'package:gym_member_app/feedbackpage.dart';
-import 'package:gym_member_app/loginpage.dart';
-import 'package:gym_member_app/user_provider.dart';
-import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
+  const HomePage({super.key});
   @override
   State<HomePage> createState() => _HomePageState();
 }
@@ -28,13 +24,11 @@ class _HomePageState extends State<HomePage> {
   //   ChangePassword(),
   //   AttendanceDetails()
   // ];
+  @override
   Widget build(BuildContext context) {
-    String memberName =
-        Provider.of<UserProvider>(context, listen: false).getMemberName();
-    String imgStr =
-        Provider.of<UserProvider>(context, listen: false).getImgStr();
-    int selectedPage =
-        Provider.of<UserProvider>(context, listen: false).getCurrentPage();
+ 
+   
+   
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -43,20 +37,20 @@ class _HomePageState extends State<HomePage> {
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              icon: Icon(Icons.exit_to_app))
+              icon:const  Icon(Icons.exit_to_app))
         ],
         toolbarHeight: 80,
         centerTitle: true,
         title: Row(
           children: [
-            Container(
+            SizedBox(
               height: 60,
               width: 80,
               child: Image.asset(
                 "assets/images/logo.png",
               ),
             ),
-            Text(
+            const Text(
               "CLUB\nDESPERADO",
               style: TextStyle(
                   color: Color(0xFF1A1363),
@@ -99,7 +93,7 @@ class _HomePageState extends State<HomePage> {
       // ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
-        child: Container(
+        child: SizedBox(
           width: double.infinity,
           child: GridView.count(
             crossAxisCount: 2,
@@ -111,7 +105,7 @@ class _HomePageState extends State<HomePage> {
                     setState(() {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => AttendanceDetails(),
+                          builder: (context) => const AttendanceDetails(),
                         ),
                       );
                     });
@@ -127,7 +121,7 @@ class _HomePageState extends State<HomePage> {
                             size: 0.2 * MediaQuery.of(context).size.width,
                           ),
                         ),
-                        Expanded(
+                        const Expanded(
                             child: Text(
                           "Attendance Details",
                           style: TextStyle(fontWeight: FontWeight.bold),
@@ -144,7 +138,7 @@ class _HomePageState extends State<HomePage> {
                     setState(() {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => Attendance(),
+                          builder: (context) =>const  Attendance(),
                         ),
                       );
                     });
@@ -160,7 +154,7 @@ class _HomePageState extends State<HomePage> {
                             size: 0.2 * MediaQuery.of(context).size.width,
                           ),
                         ),
-                        Expanded(
+                       const  Expanded(
                             child: Text(
                           "Do Attendance",
                           style: TextStyle(fontWeight: FontWeight.bold),
@@ -177,7 +171,7 @@ class _HomePageState extends State<HomePage> {
                     setState(() {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => ChangePassword(),
+                          builder: (context) => const ChangePassword(),
                         ),
                       );
                     });
@@ -193,7 +187,7 @@ class _HomePageState extends State<HomePage> {
                             size: 0.2 * MediaQuery.of(context).size.width,
                           ),
                         ),
-                        Expanded(
+                        const Expanded(
                             child: Text(
                           "Change Password",
                           style: TextStyle(fontWeight: FontWeight.bold),
@@ -210,7 +204,7 @@ class _HomePageState extends State<HomePage> {
                     setState(() {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => Contact(),
+                          builder: (context) => const Contact(),
                         ),
                       );
                     });
@@ -226,7 +220,7 @@ class _HomePageState extends State<HomePage> {
                             size: 0.2 * MediaQuery.of(context).size.width,
                           ),
                         ),
-                        Expanded(
+                        const Expanded(
                             child: Text(
                           "Contact Us",
                           style: TextStyle(fontWeight: FontWeight.bold),
@@ -243,7 +237,7 @@ class _HomePageState extends State<HomePage> {
                     setState(() {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => FeedbackPage(),
+                          builder: (context) => const FeedbackPage(),
                         ),
                       );
                     });
@@ -259,7 +253,7 @@ class _HomePageState extends State<HomePage> {
                             size: 0.2 * MediaQuery.of(context).size.width,
                           ),
                         ),
-                        Expanded(
+                       const  Expanded(
                             child: Text(
                           "Feedback",
                           style: TextStyle(fontWeight: FontWeight.bold),

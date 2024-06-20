@@ -8,6 +8,7 @@ import 'package:http/http.dart' as http;
 
 class Attendance extends StatefulWidget {
   const Attendance({super.key});
+  @override
   State<Attendance> createState() => _Attendance();
 }
 
@@ -32,7 +33,7 @@ class _Attendance extends State<Attendance> {
       });
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text("Connection problem"),
         ),
       );
@@ -53,7 +54,7 @@ class _Attendance extends State<Attendance> {
       if (res.statusCode == 200) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            shape: RoundedRectangleBorder(
+            shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(0),
                     bottomRight: Radius.circular(20),
@@ -63,7 +64,7 @@ class _Attendance extends State<Attendance> {
             margin: EdgeInsets.fromLTRB(
                 0,0.8 * screenHeight,0.1 * screenWidth,10),
             behavior: SnackBarBehavior.floating,
-            duration: Duration(seconds: 1),
+            duration:const  Duration(seconds: 1),
             content: Center(child: Text(jsonDecode(res.body)['message'])),
           ),
         );
@@ -71,13 +72,13 @@ class _Attendance extends State<Attendance> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text("Connection problem mid : $mid"),
-            duration: Duration(seconds: 1),
+            duration:const  Duration(seconds: 1),
           ),
         );
       }
     }else{
       ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
             content: Text("qr donot match"),
             duration: Duration(seconds: 1),
           ),
@@ -97,20 +98,20 @@ class _Attendance extends State<Attendance> {
                 Navigator.of(context).pop();
                 Navigator.of(context).pop();
               },
-              icon: Icon(Icons.exit_to_app))
+              icon: const Icon(Icons.exit_to_app))
         ],
         toolbarHeight: 80,
         centerTitle: true,
         title: Row(
           children: [
-            Container(
+            SizedBox(
               height: 60,
               width: 80,
               child: Image.asset(
                 "assets/images/logo.png",
               ),
             ),
-            Text(
+            const Text(
               "CLUB\nDESPERADO",
               style: TextStyle(
                   color: Color(0xFF1A1363),
@@ -153,9 +154,9 @@ class _Attendance extends State<Attendance> {
               
                   attend();
                 },
-                child: Text("Open Scanner",style: TextStyle(color: Colors.white,fontSize: 20),),
+                child:const  Text("Open Scanner",style: TextStyle(color: Colors.white,fontSize: 20),),
               ),
-              Text("Please use Scanner for attendance",style: TextStyle(fontSize: 15),),
+              const Text("Please use Scanner for attendance",style: TextStyle(fontSize: 15),),
             ],
           ),
         ),

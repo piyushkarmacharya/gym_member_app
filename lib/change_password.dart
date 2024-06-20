@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 
 class ChangePassword extends StatefulWidget {
   const ChangePassword({super.key});
+  @override
   State<ChangePassword> createState() => _ChangePasswordState();
 }
 
@@ -38,7 +39,7 @@ class _ChangePasswordState extends State<ChangePassword> {
       if (res.statusCode == 200) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            shape: RoundedRectangleBorder(
+            shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(0),
                     bottomRight: Radius.circular(20),
@@ -48,7 +49,7 @@ class _ChangePasswordState extends State<ChangePassword> {
             margin: EdgeInsets.fromLTRB(
                 0,0.8 * screenHeight,0.1 * screenWidth,10),
             behavior: SnackBarBehavior.floating,
-            duration: Duration(seconds: 1),
+            duration: const Duration(seconds: 1),
             content: Center(child: Text(jsonDecode(res.body)['message'])),
           ),
         );
@@ -57,22 +58,22 @@ class _ChangePasswordState extends State<ChangePassword> {
             Provider.of<UserProvider>(context, listen: false).setCurrentPage(0);
             Navigator.of(context).pushReplacement(
               MaterialPageRoute(
-                builder: (context) => HomePage(),
+                builder: (context) => const HomePage(),
               ),
             );
           });
         }
       } else {
         ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text("Connection problem")));
+            .showSnackBar(const SnackBar(content: Text("Connection problem")));
       }
     } catch (e) {
       print(e);
     }
   }
-  List<bool> _showPassword=[false,false,false];
+  final List<bool> _showPassword=[false,false,false];
   @override
-  Widget build(BuildContext) {
+  Widget build(BuildContext context) {
     return Scaffold(
        appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -82,20 +83,20 @@ class _ChangePasswordState extends State<ChangePassword> {
                 Navigator.of(context).pop();
                 Navigator.of(context).pop();
               },
-              icon: Icon(Icons.exit_to_app))
+              icon:const  Icon(Icons.exit_to_app))
         ],
         toolbarHeight: 80,
         centerTitle: true,
         title: Row(
           children: [
-            Container(
+            SizedBox(
               height: 60,
               width: 80,
               child: Image.asset(
                 "assets/images/logo.png",
               ),
             ),
-            Text(
+            const Text(
               "CLUB\nDESPERADO",
               style: TextStyle(
                   color: Color(0xFF1A1363),
@@ -112,7 +113,7 @@ class _ChangePasswordState extends State<ChangePassword> {
           child: Center(
             child: Padding(
               padding: const EdgeInsets.all(20.0),
-              child: Container(
+              child: SizedBox(
                 height: 500,
                 width: 500,
                 child: Column(
@@ -153,7 +154,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                                             : Icons.visibility),
                                       ),
                         labelText: "Current password",
-                        prefixIcon: Icon(Icons.lock),
+                        prefixIcon: const Icon(Icons.lock),
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -164,7 +165,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                         return null;
                       },
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     TextFormField(
@@ -203,7 +204,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                                             : Icons.visibility),
                                       ),
                         labelText: "New password",
-                        prefixIcon: Icon(Icons.lock),
+                        prefixIcon: const Icon(Icons.lock),
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -216,7 +217,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                         return null;
                       },
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     TextFormField(
@@ -257,7 +258,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                                             : Icons.visibility),
                                       ),
                         labelText: "Confirm password",
-                        prefixIcon: Icon(Icons.lock),
+                        prefixIcon: const Icon(Icons.lock),
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -270,10 +271,10 @@ class _ChangePasswordState extends State<ChangePassword> {
                         return null;
                       },
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
-                    Container(
+                    SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
                         style: ButtonStyle(
@@ -291,7 +292,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                             }
                           });
                         },
-                        child: Text("Change Password",style: TextStyle(color: Colors.white),),
+                        child:const  Text("Change Password",style: TextStyle(color: Colors.white),),
                       ),
                     ),
                   ],

@@ -1,12 +1,11 @@
-import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
-import "package:flutter/widgets.dart";
 import "package:gym_member_app/homepage.dart";
 import "package:gym_member_app/user_provider.dart";
 import "package:provider/provider.dart";
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
+  @override
   State<Dashboard> createState() => _Dashboard();
 }
 
@@ -16,7 +15,7 @@ class _Dashboard extends State<Dashboard> {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(20.0),
-        child: Container(
+        child: SizedBox(
           width: double.infinity,
           child: GridView.count(
             crossAxisCount: 2,
@@ -29,7 +28,7 @@ class _Dashboard extends State<Dashboard> {
             Provider.of<UserProvider>(context, listen: false).setCurrentPage(3);
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => HomePage(),
+                builder: (context) => const HomePage(),
               ),
             );
           });
@@ -45,7 +44,7 @@ class _Dashboard extends State<Dashboard> {
                             size: 0.2 * MediaQuery.of(context).size.width,
                           ),
                         ),
-                        Expanded(child: Text("Attendance Details",style: TextStyle(fontWeight: FontWeight.bold),))
+                        const Expanded(child: Text("Attendance Details",style: TextStyle(fontWeight: FontWeight.bold),))
                       ],
                     ),
                   ),
@@ -64,7 +63,7 @@ class _Dashboard extends State<Dashboard> {
                           size: 0.2 * MediaQuery.of(context).size.width,
                         ),
                       ),
-                      Expanded(child: Text("Do Attendance",style: TextStyle(fontWeight: FontWeight.bold),))
+                     const  Expanded(child: Text("Do Attendance",style: TextStyle(fontWeight: FontWeight.bold),))
                     ],
                   ),
                 ),
@@ -82,7 +81,7 @@ class _Dashboard extends State<Dashboard> {
                           size: 0.2 * MediaQuery.of(context).size.width,
                         ),
                       ),
-                      Expanded(child: Text("Change Password",style: TextStyle(fontWeight: FontWeight.bold),))
+                      const Expanded(child: Text("Change Password",style: TextStyle(fontWeight: FontWeight.bold),))
                     ],
                   ),
                 ),
@@ -100,7 +99,7 @@ class _Dashboard extends State<Dashboard> {
                           size: 0.2 * MediaQuery.of(context).size.width,
                         ),
                       ),
-                      Expanded(child: Text("Contact Us",style: TextStyle(fontWeight: FontWeight.bold),))
+                      const Expanded(child: Text("Contact Us",style: TextStyle(fontWeight: FontWeight.bold),))
                     ],
                   ),
                 ),
