@@ -77,10 +77,22 @@ class _Attendance extends State<Attendance> {
         );
       }
     }else{
+           final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
       ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text("qr donot match"),
-            duration: Duration(seconds: 1),
+           SnackBar(
+            shape:  const RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(0),
+                    bottomRight: Radius.circular(20),
+                    topLeft: Radius.circular(0),
+                    topRight: Radius.circular(20))),
+            backgroundColor: Colors.red,
+            margin: EdgeInsets.fromLTRB(
+                0,0.8 * screenHeight,0.1 * screenWidth,10),
+            behavior: SnackBarBehavior.floating,
+            duration:  const Duration(seconds: 3),
+            content: const Center(child: Text("Qr donot match")),
           ),
         );
     }

@@ -56,7 +56,7 @@ class _ContactState extends State<Contact> {
                         fontSize: 20,
                         fontWeight: FontWeight.bold),),
               ),
-              const Text("   Byasi, Bhaktapur-15"),
+              const Text("   Byasi-02, Bhaktapur"),
               Padding(
                 padding: const EdgeInsets.fromLTRB(8,16,8,8),
                 child: Table(
