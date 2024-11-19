@@ -22,10 +22,10 @@ class _ChangePasswordState extends State<ChangePassword> {
   ];
 
   Future<void> setNewPassword(String oldPass, String newPass) async {
-     final screenHeight = MediaQuery.of(context).size.height;
+    final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
     try {
-      String url=Provider.of<UserProvider>(context,listen: false).getUrl();
+      String url = Provider.of<UserProvider>(context, listen: false).getUrl();
       final res = await http.post(
         Uri.parse("http://$url:8000/api/member/change-password"),
         headers: {'Content-Type': 'application/json'},
@@ -45,9 +45,12 @@ class _ChangePasswordState extends State<ChangePassword> {
                     bottomRight: Radius.circular(20),
                     topLeft: Radius.circular(0),
                     topRight: Radius.circular(20))),
-            backgroundColor: jsonDecode(res.body)['message']=="Password changed"?Colors.green:Colors.red,
+            backgroundColor:
+                jsonDecode(res.body)['message'] == "Password changed"
+                    ? Colors.green
+                    : Colors.red,
             margin: EdgeInsets.fromLTRB(
-                0,0.8 * screenHeight,0.1 * screenWidth,10),
+                0, 0.8 * screenHeight, 0.1 * screenWidth, 10),
             behavior: SnackBarBehavior.floating,
             duration: const Duration(seconds: 1),
             content: Center(child: Text(jsonDecode(res.body)['message'])),
@@ -68,14 +71,15 @@ class _ChangePasswordState extends State<ChangePassword> {
             .showSnackBar(const SnackBar(content: Text("Connection problem")));
       }
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
     }
   }
-  final List<bool> _showPassword=[false,false,false];
+
+  final List<bool> _showPassword = [false, false, false];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       appBar: AppBar(
+      appBar: AppBar(
         automaticallyImplyLeading: false,
         actions: [
           IconButton(
@@ -83,7 +87,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                 Navigator.of(context).pop();
                 Navigator.of(context).pop();
               },
-              icon:const  Icon(Icons.exit_to_app))
+              icon: const Icon(Icons.exit_to_app))
         ],
         toolbarHeight: 80,
         centerTitle: true,
@@ -123,36 +127,36 @@ class _ChangePasswordState extends State<ChangePassword> {
                       obscureText: !_showPassword[0],
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Color(0xFF332F64),
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                              focusedBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Color(0xFF332F64),
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Color(0xFF332F64),
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                       suffixIcon: IconButton(
-                                        onPressed: () {
-                                          setState(() {
-                                            _showPassword[0] = !_showPassword[0];
-                                          });
-                                        },
-                                        icon: Icon(_showPassword[0]
-                                            ? Icons.visibility_off
-                                            : Icons.visibility),
-                                      ),
+                          borderSide: const BorderSide(
+                            color: Color(0xFF332F64),
+                            width: 2,
+                          ),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                            color: Color(0xFF332F64),
+                            width: 2,
+                          ),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                            color: Color(0xFF332F64),
+                            width: 2,
+                          ),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              _showPassword[0] = !_showPassword[0];
+                            });
+                          },
+                          icon: Icon(_showPassword[0]
+                              ? Icons.visibility_off
+                              : Icons.visibility),
+                        ),
                         labelText: "Current password",
                         prefixIcon: const Icon(Icons.lock),
                       ),
@@ -173,36 +177,36 @@ class _ChangePasswordState extends State<ChangePassword> {
                       obscureText: !_showPassword[1],
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Color(0xFF332F64),
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                              focusedBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Color(0xFF332F64),
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Color(0xFF332F64),
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
+                          borderSide: const BorderSide(
+                            color: Color(0xFF332F64),
+                            width: 2,
+                          ),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                            color: Color(0xFF332F64),
+                            width: 2,
+                          ),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                            color: Color(0xFF332F64),
+                            width: 2,
+                          ),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                         suffixIcon: IconButton(
-                                        onPressed: () {
-                                          setState(() {
-                                            _showPassword[1] = !_showPassword[1];
-                                          });
-                                        },
-                                        icon: Icon(_showPassword[1]
-                                            ? Icons.visibility_off
-                                            : Icons.visibility),
-                                      ),
+                          onPressed: () {
+                            setState(() {
+                              _showPassword[1] = !_showPassword[1];
+                            });
+                          },
+                          icon: Icon(_showPassword[1]
+                              ? Icons.visibility_off
+                              : Icons.visibility),
+                        ),
                         labelText: "New password",
                         prefixIcon: const Icon(Icons.lock),
                       ),
@@ -221,42 +225,40 @@ class _ChangePasswordState extends State<ChangePassword> {
                       height: 20,
                     ),
                     TextFormField(
-
                       controller: ctr[2],
                       obscureText: !_showPassword[2],
                       decoration: InputDecoration(
-                      
                         border: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Color(0xFF332F64),
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                              focusedBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Color(0xFF332F64),
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Color(0xFF332F64),
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
+                          borderSide: const BorderSide(
+                            color: Color(0xFF332F64),
+                            width: 2,
+                          ),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                            color: Color(0xFF332F64),
+                            width: 2,
+                          ),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                            color: Color(0xFF332F64),
+                            width: 2,
+                          ),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                         suffixIcon: IconButton(
-                                        onPressed: () {
-                                          setState(() {
-                                            _showPassword[2] = !_showPassword[2];
-                                          });
-                                        },
-                                        icon: Icon(_showPassword[2]
-                                            ? Icons.visibility_off
-                                            : Icons.visibility),
-                                      ),
+                          onPressed: () {
+                            setState(() {
+                              _showPassword[2] = !_showPassword[2];
+                            });
+                          },
+                          icon: Icon(_showPassword[2]
+                              ? Icons.visibility_off
+                              : Icons.visibility),
+                        ),
                         labelText: "Confirm password",
                         prefixIcon: const Icon(Icons.lock),
                       ),
@@ -278,9 +280,9 @@ class _ChangePasswordState extends State<ChangePassword> {
                       width: double.infinity,
                       child: ElevatedButton(
                         style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(
+                          backgroundColor: WidgetStateProperty.all<Color>(
                               const Color(0xFF1A1363)),
-                          shape: MaterialStateProperty.all<OutlinedBorder>(
+                          shape: WidgetStateProperty.all<OutlinedBorder>(
                             RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(24)),
                           ),
@@ -292,7 +294,10 @@ class _ChangePasswordState extends State<ChangePassword> {
                             }
                           });
                         },
-                        child:const  Text("Change Password",style: TextStyle(color: Colors.white),),
+                        child: const Text(
+                          "Change Password",
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ),
                     ),
                   ],

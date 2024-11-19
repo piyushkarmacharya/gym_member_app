@@ -2,7 +2,6 @@ import "dart:convert";
 //Required for jsonDecode
 
 import "package:flutter/material.dart";
-import "package:flutter/widgets.dart";
 import 'package:gym_member_app/homepage.dart';
 import "package:gym_member_app/user_provider.dart";
 import "package:http/http.dart" as http;
@@ -49,7 +48,7 @@ class _LoginPageState extends State<LoginPage> {
           actions: [
             GestureDetector(
               child: const Padding(
-                padding:  EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(8.0),
                 child: Icon(
                   Icons.people,
                   color: Color(0xFF1A1363),
@@ -118,7 +117,7 @@ class _LoginPageState extends State<LoginPage> {
                               return null;
                             },
                           ),
-                         const  SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           TextFormField(
@@ -174,11 +173,9 @@ class _LoginPageState extends State<LoginPage> {
                             width: double.infinity,
                             child: ElevatedButton(
                               style: ButtonStyle(
-                                backgroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                        const Color(0xFF1A1363)),
-                                shape:
-                                    MaterialStateProperty.all<OutlinedBorder>(
+                                backgroundColor: WidgetStateProperty.all<Color>(
+                                    const Color(0xFF1A1363)),
+                                shape: WidgetStateProperty.all<OutlinedBorder>(
                                   RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(24)),
                                 ),
@@ -197,7 +194,7 @@ class _LoginPageState extends State<LoginPage> {
                                     Navigator.of(context).push(
                                       MaterialPageRoute(
                                         builder: (context) {
-                                          return HomePage();
+                                          return const HomePage();
                                         },
                                       ),
                                     );
@@ -208,24 +205,24 @@ class _LoginPageState extends State<LoginPage> {
                                         MediaQuery.of(context).size.width;
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
-                                        shape:const  RoundedRectangleBorder(
+                                        shape: const RoundedRectangleBorder(
                                             borderRadius: BorderRadius.only(
                                                 bottomLeft: Radius.circular(0),
                                                 bottomRight:
                                                     Radius.circular(20),
                                                 topLeft: Radius.circular(0),
                                                 topRight: Radius.circular(20))),
-                                        backgroundColor:
-                                            Colors.red,
+                                        backgroundColor: Colors.red,
                                         margin: EdgeInsets.fromLTRB(
                                             0,
                                             0.8 * screenHeight,
                                             0.1 * screenWidth,
                                             10),
                                         behavior: SnackBarBehavior.floating,
-                                        duration:const  Duration(seconds: 1),
-                                        content:const  Center(
-                                            child: Text("Email and password donot match")),
+                                        duration: const Duration(seconds: 1),
+                                        content: const Center(
+                                            child: Text(
+                                                "Email and password donot match")),
                                       ),
                                     );
                                   }
